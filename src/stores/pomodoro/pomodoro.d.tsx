@@ -5,6 +5,7 @@ export interface Pomodoro{
     startTime: string;
     finishTime: string;
     idUser: string;
+    settings: Object;
 
 }
 // completed = models.BooleanField() 

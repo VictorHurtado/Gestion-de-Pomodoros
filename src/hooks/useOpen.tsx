@@ -4,7 +4,7 @@ import {useState} from 'react'
 export const useOpen = () => {
     const [open, setOpen] = useState<boolean>(false);
 
-    const handleClickOpen = () => {
+    const handleOpen = () => {
       console.log("Open")
         setOpen(true);
     };
@@ -14,7 +14,7 @@ export const useOpen = () => {
     };
   return {
     open,
-    handleClickOpen,
+    handleOpen: handleOpen,
     handleClose
   }
 }

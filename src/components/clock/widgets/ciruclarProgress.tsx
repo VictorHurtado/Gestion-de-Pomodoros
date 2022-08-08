@@ -24,8 +24,8 @@ export function CircularProgressWithLabel(
                     justifyContent: 'center',
                 }}
             >
-                <Typography variant='h1' align="center" color="primary">
-                    {`${Math.round(props.value)}`}
+                <Typography variant='h3' align="center" color="primary">
+                    {`${props.label}`}
                 </Typography>
                 
             </Box>

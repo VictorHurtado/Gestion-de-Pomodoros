@@ -11,7 +11,12 @@ const initialState:Pomodoro ={
     typeOf: 1,
     startTime: '',
     finishTime: '',
-    idUser: ''
+    idUser: '',
+    settings:{
+        work:'25',
+        shortBreak:'5',
+        LongBreak:'25'
+    }
 }
 const pomodoroSlicer = createSlice({
     name: "pomodoroSlicer",
@@ -19,28 +24,13 @@ const pomodoroSlicer = createSlice({
     reducers: {
         updatePomodoroTime: (state:Pomodoro, action: PayloadAction<string>) => {
             state.time = action.payload;
+        },
+        updatePomodoroSettings: (state:Pomodoro, action: PayloadAction<Object>)=>{
+            state.settings = action.payload;
+
         }
     }
 })
 export const { updatePomodoroTime } = pomodoroSlicer.actions
 
 export default pomodoroSlicer.reducer 
-// import { Pomodoro } from "./pomodoro.d";
-
-// interface Action{
-//     type: string;
-//     payload: any;
-// }
-
-// export const PomodoroReducer= (state:Pomodoro, {payload,type}:Action)=>{
-
-//     switch(type){
-//         case UPDATE_POMODORO_TIME:
-//             return {
-//                 ...state,
-//                 time: payload
-//             }
-//         default:
-//             state
-//     }
-// }
