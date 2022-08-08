@@ -5,10 +5,12 @@ const settingsSchema = {
     type: 'object',
     properties: {
         Pomodoro: {
+            
             description: 'Work time configurate',
             type: 'integer',
             minimum: 0,
             maximum: 60,
+           
         },
         DescansoCorto: {
             description: 'Short Break time configurate',
@@ -24,7 +26,7 @@ const settingsSchema = {
             maximum: 60,
         },
     },
-    required: ['workTime', 'shortBreak','longBreak'],
+    required: ['Pomodoro', 'DescansoCorto','DescansoLargo'],
 };
 const ajv = new Ajv({ allErrors: true, useDefaults: true });
 

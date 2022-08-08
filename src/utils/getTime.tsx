@@ -12,5 +12,7 @@ export const getReturnValues = (countDown: number) => {
 
 export function transformSecondsToFormat(seconds: number): string {
     const miliseconds = seconds*1000;
-    return new Date(miliseconds).toISOString().slice(11, 19);
+    const timeFormat =new Date(miliseconds).toISOString().slice(11, 19);
+   
+    return timeFormat.startsWith('00')? timeFormat.substring(3, timeFormat.length ) : timeFormat;
 }

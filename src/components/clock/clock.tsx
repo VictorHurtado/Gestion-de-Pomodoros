@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Box } from '@mui/system';
 import { Card, Button } from '@mui/material';
 
 //Interfaces
-import { Pomodoro } from '../../stores/pomodoro/pomodoro.d';
 
 //states
 import { useSelector } from 'react-redux';
@@ -20,11 +19,12 @@ import { CircularProgressWithLabel } from './widgets/ciruclarProgress'
 import { CardClass, BoxHeaderClass } from './classes/clockClasses';
 import { transformSecondsToFormat } from '../../utils/getTime';
 
+
 export const Clock = () => {
-  const time = useSelector((state: Pomodoro) => state.time);
+  const settings = useSelector((state:any) => state.settings);
+ 
   const { open, handleOpen, handleClose } = useOpen();
-  const { start, stop, reset, ticking, timeLeft, progress } = useCountdown({ minutes: 1, onStartCallback: () => console.log("Iniciando"), onStopCallback: () => console.log("Pausado"), onCompleteCallback: () => console.log('Termino') });
-  console.log('timeLeft: ' + timeLeft);
+  const { start, stop, reset, ticking, timeLeft, progress } = useCountdown({ minutes:settings.work , onStartCallback: () => console.log("Iniciando"), onStopCallback: () => console.log("Pausado"), onCompleteCallback: () => console.log('Termino') });
 
   return (
     <React.Fragment>
@@ -34,11 +34,6 @@ export const Clock = () => {
         <Card elevation={2} sx={CardClass}>
 
           <CircularProgressWithLabel value={-progress} label={`${transformSecondsToFormat(timeLeft)} `} />
-          {/* {days + hours + minutes + seconds <= 0 ? <h1>Exipiro</h1> : } */}
-
-
-
-
 
         </Card>
         <CircularPlayButton onclick={() => {!ticking ? start():stop() }} />

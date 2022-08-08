@@ -6,7 +6,7 @@ import App from './App';
 import { ThemeConfig } from './theme/theme.config';
 
 import { Provider } from 'react-redux';
-import {pomodoroStore} from './stores/store';
+import {store} from './stores/store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeConfig>
-      <Provider store={pomodoroStore}>
+      <Provider store={store}>
         <App />
       </Provider>
 

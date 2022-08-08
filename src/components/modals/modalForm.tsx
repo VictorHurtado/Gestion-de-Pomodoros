@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from '@mui/material'
+import {  Dialog, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
 import {SettingsForm} from './widgets/settingsForm'
 interface Props {
     open: boolean,

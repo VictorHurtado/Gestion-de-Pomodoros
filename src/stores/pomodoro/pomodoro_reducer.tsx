@@ -12,11 +12,7 @@ const initialState:Pomodoro ={
     startTime: '',
     finishTime: '',
     idUser: '',
-    settings:{
-        work:'25',
-        shortBreak:'5',
-        LongBreak:'25'
-    }
+
 }
 const pomodoroSlicer = createSlice({
     name: "pomodoroSlicer",
@@ -25,12 +21,8 @@ const pomodoroSlicer = createSlice({
         updatePomodoroTime: (state:Pomodoro, action: PayloadAction<string>) => {
             state.time = action.payload;
         },
-        updatePomodoroSettings: (state:Pomodoro, action: PayloadAction<Object>)=>{
-            state.settings = action.payload;
-
-        }
     }
 })
-export const { updatePomodoroTime } = pomodoroSlicer.actions
+export const { updatePomodoroTime} = pomodoroSlicer.actions
 
 export default pomodoroSlicer.reducer 

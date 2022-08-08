@@ -1,8 +1,8 @@
-import React,{useState,useRef} from 'react'
+import React from 'react'
 import Button from '@mui/material/Button';
 import DialogActions from '@mui/material/DialogActions';
-
-import { useDispatch } from 'react-redux';
+import {updateAllSettings} from '../../../stores/settings/settings_reducer'
+import { useDispatch} from 'react-redux';
 
 import { AutoForm,AutoField, ErrorField, SubmitField } from 'uniforms-mui';
 
@@ -12,24 +12,33 @@ interface Props{
     onClose: ()=>void;
 }
 
+
 export const SettingsForm = ({onClose}:Props) => {
-    const [settings,setSettings]= useState({});
+
     const dispatch = useDispatch();
 
-    
+    function handleSubmit(model: any){
+        
+        dispatch(updateAllSettings({ 
+            work:model.Pomodoro,
+            shortBreak:model.DescansoCorto,
+            longBreak:model.DescansoLargo,
+        }))
+        onClose();
+    }
     return (
-        <AutoForm  schema={schema} onSubmit={model=>console.log(model)} >
+        <AutoForm  schema={schema} onSubmit={handleSubmit}>
             <h4>IT meeting guest questionnaire</h4>
             <AutoField name="Pomodoro" />
             <ErrorField name="Pomodoro">
                 <span>No es un tiempo valido!</span>
             </ErrorField>
-            <AutoField name="DescansoCorto" />
+            <AutoField name="DescansoCorto"  />
             <ErrorField
                 name="DescansoCorto"
                 errorMessage="No es un tiempo valido!"
             />
-            <AutoField name="DescansoLargo" />
+            <AutoField name="DescansoLargo"  />
             <ErrorField
                 name="DescansoLargo"
                 errorMessage="No provee un tiempo valido!"
@@ -37,7 +46,8 @@ export const SettingsForm = ({onClose}:Props) => {
            
            <DialogActions>
                 <Button variant="contained" onClick={onClose}>Cancel</Button>
-                <SubmitField onClick={()=>console.log(settings)}> Guardar</SubmitField>
+                <SubmitField name='Submit'  label="Enviar"></SubmitField>
+                
             </DialogActions>
         </AutoForm>
     )
