@@ -14,7 +14,7 @@ export const useOpen = () => {
     };
   return {
     open,
-    handleOpen: handleOpen,
+     handleOpen,
     handleClose
   }
 }

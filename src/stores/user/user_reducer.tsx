@@ -1,9 +1,7 @@
 import { Users } from "./users.d";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState:Users = {
-    
-};
+const initialState:Users = {};
 
 const usersSlicer = createSlice({
     name: 'users',
@@ -13,22 +11,26 @@ const usersSlicer = createSlice({
             state.username = action.payload;
 
         },
-        setPassword: (state:Users,  action: PayloadAction<string>) =>{
-            state.password = action.payload;
+        setPassword: (state:Users,  action: PayloadAction<number>) =>{
+            state.idUser = action.payload;
 
         },
-        setToken: (state:Users, action: PayloadAction<string>)=>{
-            state.token = action.payload;
+        
+        deleteUser: (state:Users, action: PayloadAction<Users>)=>{
+    
+            delete state.idUser;
+            delete state.username;
+            delete state.token;
+            delete state.refreshToken;
         },
-       
         updateAllProperties: (state:Users, action: PayloadAction<Users>) =>{
 
             state.username= action.payload.username;
-            state.password= action.payload.password;
-            state.token= action.payload.token;
+            state.idUser= action.payload.idUser;
+       
         }
     }
 });
-export const { updateAllProperties} = usersSlicer.actions
+export const { updateAllProperties, deleteUser} = usersSlicer.actions
 
 export default usersSlicer.reducer 

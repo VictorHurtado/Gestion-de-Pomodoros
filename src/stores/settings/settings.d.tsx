@@ -1,5 +1,7 @@
 export interface Settings{
-    work:number;
-    shortBreak:number;
-    longBreak:number;
+    current:string;
+    qtCurrent:number;
+    work:number; //1
+    shortBreak:number;//2
+    longBreak:number;//3
 }

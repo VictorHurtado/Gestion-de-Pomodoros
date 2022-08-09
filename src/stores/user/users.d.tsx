@@ -1,5 +1,6 @@
 export interface Users{
+    idUser?:number;
     username?:string;
-    password?:string;
     token?:string;
+    refreshToken?:string;
 }

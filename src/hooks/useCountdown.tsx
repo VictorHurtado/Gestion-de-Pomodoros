@@ -61,6 +61,7 @@ export default function useCountdown({ minutes, onStartCallback, onStopCallback,
   const reset = useCallback(() => {
     setTicking(false);
     setProgress(0);
+    setTime(time);
     onStopCallback?.();
   }, [onStopCallback]);
 
