@@ -13,21 +13,21 @@ const usersSlicer = createSlice({
         },
         setPassword: (state:Users,  action: PayloadAction<number>) =>{
             state.idUser = action.payload;
-
         },
         
         deleteUser: (state:Users, action: PayloadAction<Users>)=>{
     
             delete state.idUser;
             delete state.username;
-            delete state.token;
-            delete state.refreshToken;
+            delete state.access;
+            delete state.refresh;
         },
         updateAllProperties: (state:Users, action: PayloadAction<Users>) =>{
 
             state.username= action.payload.username;
             state.idUser= action.payload.idUser;
-       
+            state.access= action.payload.access;
+            state.refresh= action.payload.refresh;
         }
     }
 });

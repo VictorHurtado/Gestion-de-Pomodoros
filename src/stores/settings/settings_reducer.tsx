@@ -16,7 +16,7 @@ const settingsSlicer = createSlice({
         setCurrentAutomatically:(state:Settings, action:PayloadAction<string>) =>{
             if(state.current === 'work' && state.qtCurrent<3){
                 state.qtCurrent = state.qtCurrent + 1;
-                console.log("qtCurrent: "+state.qtCurrent);
+                // console.log("qtCurrent: "+state.qtCurrent);
                 return
             }
             if(state.current === 'shortBreak') return

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Box } from '@mui/system';
 import { Card, Button } from '@mui/material';
 
@@ -7,6 +7,7 @@ import { Card, Button } from '@mui/material';
 //states
 import { useDispatch, useSelector } from 'react-redux';
 import {setCurrent, setCurrentAutomatically} from '../../stores/settings/settings_reducer'
+import  {updateAllPomodoroProperties} from '../../stores/pomodoro/pomodoro_reducer'
 //custom hooks
 import { useOpen } from '../../hooks/useOpen';
 import { useCountdown } from '../../hooks/useCountdown';
@@ -17,31 +18,44 @@ import { CircularProgressWithLabel } from './widgets/ciruclarProgress'
 
 //style and utils
 import { CardClass, BoxHeaderClass } from './classes/clockClasses';
-import { transformSecondsToFormat } from '../../utils/getTime';
+import { transformSecondsToFormat, getTime } from '../../utils/getTime';
 import { SettingsForm } from '../modals/widgets/settingsForm';
 import { RestartButton } from '../buttons/restart'
 import { ToggleButtonMode } from '../buttons/toggleButton'
-import { calculateNextMode } from '../../utils/nextMode';
+import { calculateNextMode, modeType } from '../../utils/nextMode';
 
-
+import { savePomodoro } from '../../services/Pomodoro/repository/pomodoro_server_repository';
 
 export const Clock = () => {
   const settings = useSelector((state: any) => state.settings);
+  const pomodoro = useSelector((state: any) => state.pomodoro);
+  const user = useSelector((state: any) => state.user);
+ 
   const { open, handleOpen, handleClose } = useOpen();
   const dispatch = useDispatch();
   const { start, stop, reset, ticking, timeLeft, progress } = useCountdown({
     minutes: settings[`${settings.current}`],
-    onStartCallback: () => console.log("Iniciando"),
+    onStartCallback: () => {
+      console.log("iniciando..");
+      dispatch(updateAllPomodoroProperties({
+          completed: false,
+          time: getTime(settings[`${settings.current}`]),
+          typeOf: modeType(settings.current),
+          startTime: new Date().toLocaleTimeString(),
+          finishTime: '',
+          idUser: user.idUser? user.idUser : '',
+      }));
+      
+    },
     onStopCallback: () => console.log("Pausado"),
     onCompleteCallback: () => {
+
       const next= calculateNextMode(settings.current, settings.qtCurrent)
-      console.log("Actual :" +settings.current);
-      console.log("Siguiente: "+calculateNextMode(settings.current, settings.qtCurrent))
       dispatch(setCurrentAutomatically(settings.current));
       dispatch(setCurrent(next));
-     
+
+      if (user.idUser) savePomodoro({...pomodoro, completed:true, finishTime:new Date().toLocaleTimeString(), userId:user.idUser}, user.access);
       reset();
-   
     }
   });
 

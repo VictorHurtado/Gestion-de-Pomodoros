@@ -5,7 +5,7 @@ export interface Pomodoro{
     typeOf: number;
     startTime: string;
     finishTime: string;
-    idUser: string;
+    idUser?: string;
 
 
 }

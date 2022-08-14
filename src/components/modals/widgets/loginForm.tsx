@@ -32,7 +32,8 @@ export const LoginForm = ({ onClose }: Props) => {
         const userIsActive= await authenticationUserWithModoroServer(model)
         if(userIsActive.status === 'success'){
             setToken(userIsActive.data);
-            dispatch(updateAllProperties({username: userIsActive.data.username, idUser:userIsActive.data.idUser}));
+            dispatch(updateAllProperties( userIsActive.data));
+            
         }
         onClose();
 

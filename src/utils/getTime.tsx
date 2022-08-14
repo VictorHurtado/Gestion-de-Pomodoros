@@ -9,7 +9,13 @@ export const getReturnValues = (countDown: number) => {
 
     return [days, hours, minutes, seconds];
 };
-
+export function getTime(time: number) : string {
+    const seconds = time* 60; 
+    const miliseconds = seconds*1000;
+    const timeFormat =new Date(miliseconds).toISOString().slice(11, 19);
+   
+    return timeFormat;
+}
 export function transformSecondsToFormat(seconds: number): string {
     const miliseconds = seconds*1000;
     const timeFormat =new Date(miliseconds).toISOString().slice(11, 19);
